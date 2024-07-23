@@ -201,9 +201,19 @@ function App() {
         {connection ? "Connected ✓" : "Connect to GitHub"}
       </button>
       {data && <p>Connected as @{data.login}</p>} */}
-        {starredRepos && false ? (
+        {starredRepos ? (
           randomIndex >= 0 && randomIndex < starredRepos.length ? (
-            <RepoCard repo={starredRepos[randomIndex]} />
+            <RepoCard
+              repo={starredRepos[randomIndex]}
+              onNext={() => {
+                setRandomIndex(
+                  Math.min(
+                    starredRepos.length - 1,
+                    Math.floor(Math.random() * starredRepos.length),
+                  ),
+                );
+              }}
+            />
           ) : // <ul style={{ listStyleType: "none", padding: 0 }}>
           //   {starredRepos?.map((repo: any, i: number) => (
           //     <li

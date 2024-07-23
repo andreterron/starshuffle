@@ -16,9 +16,11 @@ import { SVGProps } from "react";
 export default function RepoCard({
   repo,
   className,
+  onNext,
 }: {
   repo: any;
   className?: string;
+  onNext?: () => void;
 }) {
   console.log(repo);
   return (
@@ -34,17 +36,26 @@ export default function RepoCard({
           </CardTitle>
           <CardDescription>
             {repo.description || (
-              <span className="text-muted italic">No description</span>
+              <span className="text-muted-foreground/50 italic">
+                No description
+              </span>
             )}
           </CardDescription>
         </CardHeader>
         <div className="flex items-center gap-2 p-6">
           {/* TODO: Get another repo */}
-          <Button variant="secondary" className="px-3 shadow-none">
+          <Button
+            variant="secondary"
+            className="px-3 shadow-none"
+            onClick={() => onNext?.()}
+          >
             Next
           </Button>
-          {/* TODO: Link */}
-          <Button className="px-3 shadow-none">Open</Button>
+          <Button className="px-3 shadow-none" asChild>
+            <a href={repo.html_url} target="_blank">
+              Open
+            </a>
+          </Button>
         </div>
       </div>
       <CardContent>
