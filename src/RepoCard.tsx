@@ -62,14 +62,22 @@ export default function RepoCard({
                   Next
                 </Button>
                 <Button className="px-3 shadow-none" asChild>
-                  <a href={repo.html_url} target="_blank">
+                  <a
+                    href={repo.html_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     Open
                   </a>
                 </Button>
               </>
             ) : (
               <Button variant="outline" className="px-3 shadow-none" asChild>
-                <a href={repo.html_url} target="_blank">
+                <a
+                  href={repo.html_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <StarIcon className="w-3 h-3 mr-1" />
                   Star
                 </a>

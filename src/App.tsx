@@ -5,7 +5,14 @@ import { useEffect, useState } from "react";
 import { Button } from "./components/ui/button";
 import { useMainframeRepo } from "./lib/use-mainframe-repo";
 import logo from "./assets/star-shuffle-logo.svg";
-import { Loader2Icon } from "lucide-react";
+import { GithubIcon, HeartIcon, Loader2Icon, LogOutIcon } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 function App() {
   const { connection, isLoading, initiateAuth } = useConnection("github");
@@ -56,7 +63,41 @@ function App() {
             Connect to GitHub
           </Button>
         ) : data ? (
-          <p>Connected as @{data.login}</p>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="data-[state=open]:bg-muted">
+                @{data.login}
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem className="group" asChild>
+                <a
+                  href={`https://github.com/sponsors/andreterron`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <HeartIcon className="size-4 mr-2 group-hover:text-red-500 transition-colors duration-75" />
+                  Sponsor
+                </a>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <a
+                  href={`https://github.com/${data.login}?tab=stars`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <GithubIcon className="size-4 mr-2" />
+                  Your Stars @ GitHub
+                </a>
+              </DropdownMenuItem>
+              {/* TODO: Logout */}
+              {/* <DropdownMenuSeparator />
+              <DropdownMenuItem>
+                <LogOutIcon className="size-4 mr-2" />
+                Logout
+              </DropdownMenuItem> */}
+            </DropdownMenuContent>
+          </DropdownMenu>
         ) : null}
       </div>
 
