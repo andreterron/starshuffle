@@ -47,7 +47,7 @@ function App() {
           alignItems: "center",
         }}
       >
-        <h1 className="text-5xl font-bold">Repo Rediscover</h1>
+        <h1 className="text-5xl font-bold">Star Shuffle</h1>
         {isLoading ? null : !connection ? (
           <Button variant="outline" onClick={() => initiateAuth()}>
             Connect to GitHub
