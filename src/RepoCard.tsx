@@ -24,54 +24,74 @@ export default function RepoCard({
 }) {
   console.log(repo);
   return (
-    <Card className={`w-full max-w-2xl ${className ?? ""}`}>
-      <div className="flex items-start justify-between gap-2">
-        <CardHeader>
-          <CardTitle className="flex items-end gap-1">
-            <span className="font-normal text-muted-foreground">
-              {repo.owner.login} /
-            </span>
-            {/* <div className="h-6 w-px relative skew-x-5 border-r" /> */}
-            {repo.name}
-          </CardTitle>
-          <CardDescription>
-            {repo.description || (
-              <span className="text-muted-foreground/50 italic">
-                No description
+    <div className="w-[36rem] mt-6 relative">
+      <div className="absolute inset-0 rounded-lg shadow-md" />
+      <Card className="absolute inset-x-[1.85rem] top-[-1.35rem] h-12 after:absolute after:inset-0 overflow-hidden after:bg-gray-50" />
+      <Card className="shadow-[0_-12px_12px_-12px_rgba(0,0,0,0.2)] absolute inset-x-4 -top-3 h-12 after:absolute after:inset-0 overflow-hidden after:bg-gray-50/50" />
+      <Card
+        className={`w-full overflow-hidden relative shadow-[0_-12px_16px_-16px_rgba(0,0,0,0.2)] ${
+          className ?? ""
+        }`}
+      >
+        <div className="flex items-start justify-between gap-2">
+          <CardHeader>
+            <CardTitle className="">
+              <span className="font-normal text-muted-foreground">
+                {repo.owner.login} /{" "}
               </span>
+              {/* <div className="h-6 w-px relative skew-x-5 border-r" /> */}
+              {repo.name}
+            </CardTitle>
+            <CardDescription>
+              {repo.description || (
+                <span className="text-muted-foreground/50 italic">
+                  No description
+                </span>
+              )}
+            </CardDescription>
+          </CardHeader>
+          <div className="flex items-center gap-2 p-6">
+            {/* TODO: Get another repo */}
+            {onNext ? (
+              <>
+                <Button
+                  variant="secondary"
+                  className="px-3 shadow-none"
+                  onClick={() => onNext?.()}
+                >
+                  Next
+                </Button>
+                <Button className="px-3 shadow-none" asChild>
+                  <a href={repo.html_url} target="_blank">
+                    Open
+                  </a>
+                </Button>
+              </>
+            ) : (
+              <Button variant="outline" className="px-3 shadow-none" asChild>
+                <a href={repo.html_url} target="_blank">
+                  <StarIcon className="w-3 h-3 mr-1" />
+                  Star
+                </a>
+              </Button>
             )}
-          </CardDescription>
-        </CardHeader>
-        <div className="flex items-center gap-2 p-6">
-          {/* TODO: Get another repo */}
-          <Button
-            variant="secondary"
-            className="px-3 shadow-none"
-            onClick={() => onNext?.()}
-          >
-            Next
-          </Button>
-          <Button className="px-3 shadow-none" asChild>
-            <a href={repo.html_url} target="_blank">
-              Open
-            </a>
-          </Button>
-        </div>
-      </div>
-      <CardContent>
-        <div className="flex gap-4 text-sm text-muted-foreground">
-          <div className="flex items-center">
-            <CircleDotIcon className="w-3 h-3 mr-1" />
-            {repo.language}
           </div>
-          <div className="flex items-center">
-            <StarIcon className="w-3 h-3 mr-1" />
-            {repo.stargazers_count}
-          </div>
-          {/* <div>Updated April 2023</div> */}
         </div>
-      </CardContent>
-    </Card>
+        <CardContent>
+          <div className="flex gap-4 text-sm text-muted-foreground">
+            <div className="flex items-center">
+              <CircleDotIcon className="w-3 h-3 mr-1" />
+              {repo.language}
+            </div>
+            <div className="flex items-center">
+              <StarIcon className="w-3 h-3 mr-1" />
+              {repo.stargazers_count}
+            </div>
+            {/* <div>Updated April 2023</div> */}
+          </div>
+        </CardContent>
+      </Card>
+    </div>
   );
 }
 
