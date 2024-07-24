@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@mainframe-api/react": "file:../../mainframe-closed/opensource/packages/react",
+    "@mainframe-api/react": "^0.8.1",
     "@radix-ui/react-slot": "^1.1.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
