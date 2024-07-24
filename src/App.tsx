@@ -4,13 +4,15 @@ import RepoCard from "./RepoCard";
 import { useEffect, useState } from "react";
 import { Button } from "./components/ui/button";
 import { useMainframeRepo } from "./lib/use-mainframe-repo";
+import logo from "./assets/star-shuffle-logo.svg";
+import { Loader2Icon } from "lucide-react";
 
 function App() {
   const { connection, isLoading, initiateAuth } = useConnection("github");
 
   // This makes a request to the GitHub API through a Mainframe proxy
   const { data } = useRequest(connection, "/user");
-  const { data: starredRepos } = useRequest(
+  const { data: starredRepos, isLoading: isLoadingStarredRepos } = useRequest(
     connection,
     "/user/starred?per_page=100",
   );
@@ -23,13 +25,14 @@ function App() {
     if (!starredRepos) {
       return;
     }
-    const mainframeIndex = (starredRepos as any[]).findIndex(
-      (r: any) => r.name === "mainframe",
-    );
-    if (mainframeIndex >= 0) {
-      setRandomIndex(mainframeIndex);
-      return;
-    }
+    // For demo purposes
+    // const mainframeIndex = (starredRepos as any[]).findIndex(
+    //   (r: any) => r.name === "mainframe",
+    // );
+    // if (mainframeIndex >= 0) {
+    //   setRandomIndex(mainframeIndex);
+    //   return;
+    // }
     setRandomIndex(
       Math.min(
         starredRepos.length - 1,
@@ -47,7 +50,7 @@ function App() {
           alignItems: "center",
         }}
       >
-        <h1 className="text-5xl font-bold">Star Shuffle</h1>
+        <img src={logo} title="Star Shuffle" />
         {isLoading ? null : !connection ? (
           <Button variant="outline" onClick={() => initiateAuth()}>
             Connect to GitHub
@@ -76,6 +79,8 @@ function App() {
               }}
             />
           ) : null
+        ) : isLoading || isLoadingStarredRepos ? (
+          <Loader2Icon className="size-6 animate-spin" />
         ) : (
           <div>
             <div className="text-center flex flex-col items-center">
