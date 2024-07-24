@@ -6,7 +6,7 @@ import { MainframeProvider } from "@mainframe-api/react";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <MainframeProvider appId="d0174965d74a823a71af48d5d88dc9dc">
+    <MainframeProvider appId={import.meta.env.MAINFRAME_APP_ID}>
       <App />
     </MainframeProvider>
   </React.StrictMode>,
