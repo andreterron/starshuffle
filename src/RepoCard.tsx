@@ -26,8 +26,8 @@ export default function RepoCard({
   return (
     <div className="w-[36rem] mt-6 relative">
       <div className="absolute inset-0 rounded-lg shadow-md" />
-      <Card className="absolute inset-x-[1.85rem] top-[-1.35rem] h-12 after:absolute after:inset-0 overflow-hidden after:bg-gray-50" />
-      <Card className="shadow-[0_-12px_12px_-12px_rgba(0,0,0,0.2)] absolute inset-x-4 -top-3 h-12 after:absolute after:inset-0 overflow-hidden after:bg-gray-50/50" />
+      <Card className="absolute inset-x-[1.85rem] top-[-1.35rem] h-12 after:absolute after:inset-0 overflow-hidden after:bg-card" />
+      <Card className="shadow-[0_-12px_12px_-12px_rgba(0,0,0,0.2)] absolute inset-x-4 -top-3 h-12 after:absolute after:inset-0 overflow-hidden after:bg-card/50" />
       <Card
         className={`w-full overflow-hidden relative shadow-[0_-12px_16px_-16px_rgba(0,0,0,0.2)] ${
           className ?? ""
