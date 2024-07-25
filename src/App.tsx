@@ -239,6 +239,100 @@ function App() {
           </div>
         )}
       </div>
+      <footer className="fixed bottom-0 left-0 p-6 w-full text-center -z-10 text-sm text-muted-foreground/80 flex items-center justify-center gap-1">
+        <span className="pb-1 border-b border-transparent">
+          Built with ❤️ by
+        </span>
+        <a
+          className="border-b border-border hover:border-primary pb-1"
+          href="https://github.com/andreterron"
+        >
+          André Terron
+        </a>{" "}
+        <span className="pb-1 border-b border-transparent">and</span>{" "}
+        <a
+          className="border-b border-border hover:border-primary pb-1"
+          href="https://github.com/mdebauge"
+        >
+          Michel DeBauge
+        </a>{" "}
+        <span className="pb-1 border-b border-transparent">using</span>{" "}
+        <a
+          className="border-b border-border hover:border-primary inline-flex items-center pb-1 gap-1"
+          href="https://mainframe.so"
+        >
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect
+              width="16"
+              height="16"
+              rx="8"
+              fill="url(#paint0_linear_1_463)"
+            />
+            <g filter="url(#filter0_d_1_463)">
+              <path
+                d="M12.6333 10.8914C12.4276 10.6057 12.4162 10.2286 12.4162 9.42857V6.57143C12.4162 5.78286 12.4276 5.40571 12.6333 5.10857C12.9304 4.69714 13.0104 4.56 12.999 4.35429C12.9761 4.11429 12.8161 4 12.4734 4H10.8623C10.2452 4 10.0967 4.19429 9.87961 4.70857C9.5711 5.41714 7.98286 9.17714 7.98286 9.17714C7.98286 9.17714 6.56601 5.31429 6.32606 4.66286C6.12039 4.12571 5.80046 4 5.32056 4H3.53807C3.18386 4 3.02389 4.11429 3.00104 4.35429C2.98962 4.56 3.0696 4.69714 3.36668 5.10857C3.57235 5.40571 3.5952 5.78286 3.5952 6.57143V9.42857C3.5952 10.2286 3.57235 10.6057 3.36668 10.8914C3.0696 11.3029 2.98962 11.4514 3.00104 11.6571C3.02389 11.8971 3.18386 12 3.53807 12H4.73782C5.09204 12 5.252 11.8971 5.27485 11.6571C5.28628 11.4514 5.19487 11.3029 4.89779 10.8914C4.69212 10.6057 4.66927 10.2286 4.66927 9.42857V6.50286C5.42339 8.35429 6.29179 10.5943 6.41747 10.9257C6.63457 11.4971 6.88595 12 7.41155 12C8.06284 12 8.18853 11.52 8.51989 10.72C8.70271 10.2743 9.55968 8.20571 10.2452 6.56V9.42857C10.2452 10.2286 10.2338 10.6057 10.0281 10.8914C9.73107 11.3029 9.65108 11.4514 9.66251 11.6571C9.68536 11.8971 9.84533 12 10.1881 12H12.4734C12.8161 12 12.9761 11.8971 12.999 11.6571C13.0104 11.4514 12.9304 11.3029 12.6333 10.8914Z"
+                fill="black"
+              />
+            </g>
+            <defs>
+              <filter
+                id="filter0_d_1_463"
+                x="3"
+                y="4"
+                width="10.5"
+                height="8.5"
+                filterUnits="userSpaceOnUse"
+                color-interpolation-filters="sRGB"
+              >
+                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feColorMatrix
+                  in="SourceAlpha"
+                  type="matrix"
+                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                  result="hardAlpha"
+                />
+                <feOffset dx="0.5" dy="0.5" />
+                <feComposite in2="hardAlpha" operator="out" />
+                <feColorMatrix
+                  type="matrix"
+                  values="0 0 0 0 0.819608 0 0 0 0 0.835294 0 0 0 0 0.858824 0 0 0 1 0"
+                />
+                <feBlend
+                  mode="normal"
+                  in2="BackgroundImageFix"
+                  result="effect1_dropShadow_1_463"
+                />
+                <feBlend
+                  mode="normal"
+                  in="SourceGraphic"
+                  in2="effect1_dropShadow_1_463"
+                  result="shape"
+                />
+              </filter>
+              <linearGradient
+                id="paint0_linear_1_463"
+                x1="8"
+                y1="0"
+                x2="8"
+                y2="16"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop stop-color="#E0F2FE" />
+                <stop offset="1" stop-color="#D1FAE5" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <code className="text-muted-foreground/80 font-medium">
+            Mainframe
+          </code>
+        </a>
+      </footer>
     </>
   );
 }
