@@ -13,6 +13,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { ModeToggle } from "./components/ui/mode-toggle";
 
 function App() {
   const { connection, isLoading, initiateAuth } = useConnection("github");
@@ -21,7 +22,7 @@ function App() {
   const { data } = useRequest(connection, "/user");
   const { data: starredRepos, isLoading: isLoadingStarredRepos } = useRequest(
     connection,
-    "/user/starred?per_page=100",
+    "/user/starred?per_page=100"
   );
 
   const mainframeRepo = useMainframeRepo();
@@ -43,8 +44,8 @@ function App() {
     setRandomIndex(
       Math.min(
         starredRepos.length - 1,
-        Math.floor(Math.random() * starredRepos.length),
-      ),
+        Math.floor(Math.random() * starredRepos.length)
+      )
     );
   }, [starredRepos?.length]);
 
@@ -58,47 +59,50 @@ function App() {
         }}
       >
         <img src={logo} title="Star Shuffle" />
-        {isLoading ? null : !connection ? (
-          <Button variant="outline" onClick={() => initiateAuth()}>
-            Connect to GitHub
-          </Button>
-        ) : data ? (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="data-[state=open]:bg-muted">
-                @{data.login}
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem className="group" asChild>
-                <a
-                  href={`https://github.com/sponsors/andreterron`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <HeartIcon className="size-4 mr-2 group-hover:text-red-500 transition-colors duration-75" />
-                  Sponsor
-                </a>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <a
-                  href={`https://github.com/${data.login}?tab=stars`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <GithubIcon className="size-4 mr-2" />
-                  Your Stars @ GitHub
-                </a>
-              </DropdownMenuItem>
-              {/* TODO: Logout */}
-              {/* <DropdownMenuSeparator />
+        <div className="flex items-center gap-2">
+          <ModeToggle />
+          {isLoading ? null : !connection ? (
+            <Button variant="outline" onClick={() => initiateAuth()}>
+              Connect to GitHub
+            </Button>
+          ) : data ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="data-[state=open]:bg-muted">
+                  @{data.login}
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem className="group" asChild>
+                  <a
+                    href={`https://github.com/sponsors/andreterron`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <HeartIcon className="size-4 mr-2 group-hover:text-red-500 transition-colors duration-75" />
+                    Sponsor
+                  </a>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <a
+                    href={`https://github.com/${data.login}?tab=stars`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <GithubIcon className="size-4 mr-2" />
+                    Your Stars @ GitHub
+                  </a>
+                </DropdownMenuItem>
+                {/* TODO: Logout */}
+                {/* <DropdownMenuSeparator />
               <DropdownMenuItem>
-                <LogOutIcon className="size-4 mr-2" />
-                Logout
+              <LogOutIcon className="size-4 mr-2" />
+              Logout
               </DropdownMenuItem> */}
-            </DropdownMenuContent>
-          </DropdownMenu>
-        ) : null}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : null}
+        </div>
       </div>
 
       <div className="flex justify-center pt-32 w-full">
@@ -114,8 +118,8 @@ function App() {
                 setRandomIndex(
                   Math.min(
                     starredRepos.length - 1,
-                    Math.floor(Math.random() * starredRepos.length),
-                  ),
+                    Math.floor(Math.random() * starredRepos.length)
+                  )
                 );
               }}
             />
