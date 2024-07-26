@@ -24,7 +24,7 @@ export default function RepoCard({
 }) {
   console.log(repo);
   return (
-    <div className="w-[36rem] max-w-full mt-6 relative">
+    <div className="w-full md:w-[36rem] max-w-full mt-6 relative">
       <div className="absolute inset-0 rounded-lg shadow-md dark:shadow-none" />
       <Card className="dark:border-border/40 absolute inset-x-[1.85rem] top-[-1.35rem] h-12" />
       <Card className="dark:border-border/60 shadow-[0_-12px_12px_-12px_rgba(0,0,0,0.2)] dark:shadow-none absolute inset-x-4 -top-3 h-12" />
@@ -34,15 +34,15 @@ export default function RepoCard({
         }`}
       >
         <div className="flex items-start justify-between gap-2">
-          <CardHeader>
-            <CardTitle className="">
+          <CardHeader className="p-3 md:p-6">
+            <CardTitle className="text-lg md:text-xl">
               <span className="font-normal text-muted-foreground">
                 {repo.owner.login} /{" "}
               </span>
               {/* <div className="h-6 w-px relative skew-x-5 border-r" /> */}
               {repo.name}
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="text-xs md:text-base !mt-0 md:mt-2">
               {repo.description || (
                 <span className="text-muted-foreground/50 italic">
                   No description
@@ -50,7 +50,7 @@ export default function RepoCard({
               )}
             </CardDescription>
           </CardHeader>
-          <div className="flex items-center gap-2 p-6">
+          <div className="flex items-center gap-2 p-3 md:p-6">
             {/* TODO: Get another repo */}
             {onNext ? (
               <>
@@ -85,7 +85,7 @@ export default function RepoCard({
             )}
           </div>
         </div>
-        <CardContent>
+        <CardContent className="p-3 md:p-6">
           <div className="flex gap-4 text-sm text-muted-foreground">
             <div className="flex items-center">
               <CircleDotIcon className="w-3 h-3 mr-1" />

@@ -22,7 +22,7 @@ function App() {
   const { data } = useRequest(connection, "/user");
   const { data: starredRepos, isLoading: isLoadingStarredRepos } = useRequest(
     connection,
-    "/user/starred?per_page=100",
+    "/user/starred?per_page=100"
   );
 
   const mainframeRepo = useMainframeRepo();
@@ -44,13 +44,13 @@ function App() {
     setRandomIndex(
       Math.min(
         starredRepos.length - 1,
-        Math.floor(Math.random() * starredRepos.length),
-      ),
+        Math.floor(Math.random() * starredRepos.length)
+      )
     );
   }, [starredRepos?.length]);
 
   return (
-    <div className="min-h-screen relative flex flex-col">
+    <div className="min-h-screen relative flex flex-col px-4 md:px-0">
       <div
         className="flex-shrink-0 flex-grow-0"
         style={{
@@ -210,8 +210,8 @@ function App() {
                 setRandomIndex(
                   Math.min(
                     starredRepos.length - 1,
-                    Math.floor(Math.random() * starredRepos.length),
-                  ),
+                    Math.floor(Math.random() * starredRepos.length)
+                  )
                 );
               }}
             />
