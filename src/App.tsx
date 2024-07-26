@@ -148,7 +148,7 @@ function App() {
           />
         </svg>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 pr-2">
           <ModeToggle />
           {isLoading ? null : !connection ? (
             <Button variant="outline" onClick={() => initiateAuth()}>
@@ -157,7 +157,10 @@ function App() {
           ) : data ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="data-[state=open]:bg-muted">
+                <Button
+                  variant="outline"
+                  className="data-[state=open]:bg-muted"
+                >
                   @{data.login}
                 </Button>
               </DropdownMenuTrigger>
