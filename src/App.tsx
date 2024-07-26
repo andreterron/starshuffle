@@ -22,7 +22,7 @@ function App() {
   const { data } = useRequest(connection, "/user");
   const { data: starredRepos, isLoading: isLoadingStarredRepos } = useRequest(
     connection,
-    "/user/starred?per_page=100"
+    "/user/starred?per_page=100",
   );
 
   const mainframeRepo = useMainframeRepo();
@@ -44,8 +44,8 @@ function App() {
     setRandomIndex(
       Math.min(
         starredRepos.length - 1,
-        Math.floor(Math.random() * starredRepos.length)
-      )
+        Math.floor(Math.random() * starredRepos.length),
+      ),
     );
   }, [starredRepos?.length]);
 
@@ -61,8 +61,6 @@ function App() {
       >
         <svg
           className="h-14"
-          width="332"
-          height="69"
           viewBox="0 0 332 69"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -210,8 +208,8 @@ function App() {
                 setRandomIndex(
                   Math.min(
                     starredRepos.length - 1,
-                    Math.floor(Math.random() * starredRepos.length)
-                  )
+                    Math.floor(Math.random() * starredRepos.length),
+                  ),
                 );
               }}
             />
