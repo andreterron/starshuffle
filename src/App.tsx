@@ -22,7 +22,7 @@ function App() {
   const { data } = useRequest(connection, "/user");
   const { data: starredRepos, isLoading: isLoadingStarredRepos } = useRequest(
     connection,
-    "/user/starred?per_page=100"
+    "/user/starred?per_page=100",
   );
 
   const mainframeRepo = useMainframeRepo();
@@ -44,14 +44,15 @@ function App() {
     setRandomIndex(
       Math.min(
         starredRepos.length - 1,
-        Math.floor(Math.random() * starredRepos.length)
-      )
+        Math.floor(Math.random() * starredRepos.length),
+      ),
     );
   }, [starredRepos?.length]);
 
   return (
-    <>
+    <div className="min-h-screen relative flex flex-col">
       <div
+        className="flex-shrink-0 flex-grow-0"
         style={{
           display: "flex",
           justifyContent: "space-between",
@@ -193,7 +194,7 @@ function App() {
         </div>
       </div>
 
-      <div className="flex justify-center pt-32 w-full">
+      <div className="flex flex-col items-center pt-32 px-4 w-full flex-grow flex-shrink-0">
         {/* <button onClick={() => initiateAuth()}>
         {connection ? "Connected ✓" : "Connect to GitHub"}
       </button>
@@ -206,8 +207,8 @@ function App() {
                 setRandomIndex(
                   Math.min(
                     starredRepos.length - 1,
-                    Math.floor(Math.random() * starredRepos.length)
-                  )
+                    Math.floor(Math.random() * starredRepos.length),
+                  ),
                 );
               }}
             />
@@ -239,29 +240,33 @@ function App() {
           </div>
         )}
       </div>
-      <footer className="fixed bottom-0 left-0 p-6 w-full text-center -z-10 text-sm text-muted-foreground/80 flex items-center justify-center gap-1">
-        <span className="pb-1 border-b border-transparent">
-          Built with ❤️ by
-        </span>
+      <footer className="flex-shrink-0 p-6 w-full text-center text-sm text-muted-foreground/80 gap-1 saturate-0 transition-all hover:saturate-100 duration-500">
+        <span className=" border-b border-transparent">Built with ❤️ by </span>
         <a
-          className="border-b border-border hover:border-primary pb-1"
+          className="border-b border-border hover:border-primary hover:text-primary"
           href="https://github.com/andreterron"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           André Terron
         </a>{" "}
-        <span className="pb-1 border-b border-transparent">and</span>{" "}
+        <span className=" border-b border-transparent">and</span>{" "}
         <a
-          className="border-b border-border hover:border-primary pb-1"
+          className="border-b border-border hover:border-primary hover:text-primary"
           href="https://github.com/mdebauge"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           Michel DeBauge
         </a>{" "}
-        <span className="pb-1 border-b border-transparent">using</span>{" "}
+        <span className=" border-b border-transparent">using</span>{" "}
         <a
-          className="border-b border-border hover:border-primary inline-flex items-center pb-1 gap-1"
+          className="border-b border-border hover:border-primary hover:text-primary"
           href="https://mainframe.so"
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          <svg
+          {/* <svg
             width="16"
             height="16"
             viewBox="0 0 16 16"
@@ -327,13 +332,11 @@ function App() {
                 <stop offset="1" stop-color="#D1FAE5" />
               </linearGradient>
             </defs>
-          </svg>
-          <code className="text-muted-foreground/80 font-medium">
-            Mainframe
-          </code>
+          </svg> */}
+          <span className="">Mainframe</span>
         </a>
       </footer>
-    </>
+    </div>
   );
 }
 

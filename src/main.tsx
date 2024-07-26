@@ -8,9 +8,9 @@ import { ThemeProvider } from "./components/ui/theme-provider.tsx";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <MainframeProvider appId={import.meta.env.VITE_MAINFRAME_APP_ID}>
-      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
         <App />
       </ThemeProvider>
     </MainframeProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
