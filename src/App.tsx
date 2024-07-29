@@ -19,6 +19,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ModeToggle } from "./components/ui/mode-toggle";
+import posthog from "posthog-js";
 
 function App() {
   const { connection, isLoading, initiateAuth, disconnect } =
@@ -30,6 +31,12 @@ function App() {
     connection,
     "/user/starred?per_page=100",
   );
+
+  useEffect(() => {
+    if (data.login) {
+      posthog.identify(data.login);
+    }
+  }, [data.login]);
 
   const mainframeRepo = useMainframeRepo();
 
@@ -207,7 +214,10 @@ function App() {
                   onSelect={() => {
                     disconnect()
                       .catch((e) => console.error(e))
-                      .finally(() => console.log("Disconnected"));
+                      .finally(() => {
+                        console.log("Disconnected");
+                        posthog.reset();
+                      });
                   }}
                 >
                   <LogOutIcon className="size-4 mr-2" />
