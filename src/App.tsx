@@ -69,37 +69,37 @@ function App() {
           <path
             d="M24 49H26.8C29.4 49 31.8 47.8 33.4 45.6L45.6 28.4C47 26.2 49.6 25 52.2 25"
             className="stroke-primary"
-            stroke-width="4"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M24 25H27.8C30.8 25 33.6 26.8 35 29.4"
             className="stroke-primary"
-            stroke-width="4"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M52.2 48.9998C49.6 48.9998 47 47.5998 45.6 45.3998L44.6 43.7998"
             className="stroke-primary"
-            stroke-width="4"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M62.335 40L64.2925 43.9657L68.67 44.6055L65.5025 47.6907L66.25 52.0492L62.335 49.9903L58.42 52.0492L59.1675 47.6907L56 44.6055L60.3775 43.9657L62.335 40Z"
             className="stroke-primary"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M62.335 16L64.2925 19.9657L68.67 20.6055L65.5025 23.6907L66.25 28.0492L62.335 25.9903L58.42 28.0492L59.1675 23.6907L56 20.6055L60.3775 19.9657L62.335 16Z"
             className="stroke-primary"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M307.739 38.1894V40.4844H292.124C292.259 43.2294 294.239 45.6144 297.479 45.6144C299.774 45.6144 301.619 44.4444 302.969 42.1044L307.469 43.7694C305.534 48.1794 302.114 50.3844 297.164 50.3844C289.379 50.3844 286.274 44.0844 286.274 38.6844C286.274 33.2844 289.379 26.9844 297.164 26.9844C300.764 26.9844 303.689 28.4694 305.309 30.7644C306.929 32.9694 307.739 35.6244 307.739 38.1894ZM297.164 31.7544C294.509 31.7544 292.664 33.6894 292.259 36.0744H302.024C301.394 33.1944 299.774 31.7544 297.164 31.7544Z"
