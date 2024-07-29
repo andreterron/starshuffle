@@ -30,11 +30,14 @@ function App() {
 
   const [randomIndex, setRandomIndex] = useState(-1);
 
+  // DEMO
+  // const [counter, setCounter] = useState(4);
+
   useEffect(() => {
     if (!starredRepos) {
       return;
     }
-    // For demo purposes
+    // DEMO
     // const mainframeIndex = (starredRepos as any[]).findIndex(
     //   (r: any) => r.name === "mainframe",
     // );
@@ -212,6 +215,17 @@ function App() {
             <RepoCard
               repo={starredRepos[randomIndex]}
               onNext={() => {
+                // DEMO
+                // if (counter === 1) {
+                //   const mainframeIndex = (starredRepos as any[]).findIndex(
+                //     (r: any) => r.name === "mainframe",
+                //   );
+                //   if (mainframeIndex >= 0) {
+                //     setRandomIndex(mainframeIndex);
+                //     return;
+                //   }
+                // }
+                // setCounter((v) => v - 1);
                 setRandomIndex(
                   Math.min(
                     starredRepos.length - 1,
