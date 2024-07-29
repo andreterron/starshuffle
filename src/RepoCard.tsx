@@ -22,7 +22,6 @@ export default function RepoCard({
   className?: string;
   onNext?: () => void;
 }) {
-  console.log(repo);
   return (
     <div className="w-full md:w-[36rem] max-w-full mt-6 relative">
       <div className="absolute inset-0 rounded-lg shadow-md dark:shadow-none" />

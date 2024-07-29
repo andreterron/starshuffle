@@ -16,7 +16,8 @@ import {
 import { ModeToggle } from "./components/ui/mode-toggle";
 
 function App() {
-  const { connection, isLoading, initiateAuth } = useConnection("github");
+  const { connection, isLoading, initiateAuth, disconnect } =
+    useConnection("github");
 
   // This makes a request to the GitHub API through a Mainframe proxy
   const { data } = useRequest(connection, "/user");
@@ -184,11 +185,17 @@ function App() {
                   </a>
                 </DropdownMenuItem>
                 {/* TODO: Logout */}
-                {/* <DropdownMenuSeparator />
-              <DropdownMenuItem>
-              <LogOutIcon className="size-4 mr-2" />
-              Logout
-              </DropdownMenuItem> */}
+                <DropdownMenuSeparator />
+                <DropdownMenuItem
+                  onSelect={() => {
+                    disconnect()
+                      .catch((e) => console.error(e))
+                      .finally(() => console.log("Disconnected"));
+                  }}
+                >
+                  <LogOutIcon className="size-4 mr-2" />
+                  Disconnect
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           ) : null}
