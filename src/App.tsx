@@ -4,8 +4,13 @@ import RepoCard from "./RepoCard";
 import { useEffect, useState } from "react";
 import { Button } from "./components/ui/button";
 import { useMainframeRepo } from "./lib/use-mainframe-repo";
-import logo from "./assets/star-shuffle-logo.svg";
-import { GithubIcon, HeartIcon, Loader2Icon, LogOutIcon } from "lucide-react";
+import {
+  Code2Icon,
+  HeartIcon,
+  Loader2Icon,
+  LogOutIcon,
+  StarIcon,
+} from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -167,6 +172,16 @@ function App() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
+                <DropdownMenuItem asChild>
+                  <a
+                    href={`https://github.com/andreterron/starshuffle`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Code2Icon className="size-4 mr-2" />
+                    View source code
+                  </a>
+                </DropdownMenuItem>
                 <DropdownMenuItem className="group" asChild>
                   <a
                     href={`https://github.com/sponsors/andreterron`}
@@ -177,18 +192,17 @@ function App() {
                     Sponsor
                   </a>
                 </DropdownMenuItem>
+                <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
                   <a
                     href={`https://github.com/${data.login}?tab=stars`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <GithubIcon className="size-4 mr-2" />
+                    <StarIcon className="size-4 mr-2" />
                     Your Stars @ GitHub
                   </a>
                 </DropdownMenuItem>
-                {/* TODO: Logout */}
-                <DropdownMenuSeparator />
                 <DropdownMenuItem
                   onSelect={() => {
                     disconnect()
