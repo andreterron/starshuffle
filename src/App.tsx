@@ -33,10 +33,10 @@ function App() {
   );
 
   useEffect(() => {
-    if (data.login) {
+    if (data?.login) {
       posthog.identify(data.login);
     }
-  }, [data.login]);
+  }, [data?.login]);
 
   const mainframeRepo = useMainframeRepo();
 
