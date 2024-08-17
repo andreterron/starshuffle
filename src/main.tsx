@@ -13,7 +13,12 @@ posthog.init("phc_5xv7jae6Br2ZYtwI1FbvX2MvMkvryfBYTAzamEtBCR6", {
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <MainframeProvider appId={import.meta.env.VITE_MAINFRAME_APP_ID}>
+    <MainframeProvider
+      appId={import.meta.env.VITE_MAINFRAME_APP_ID}
+      // config={{
+      //   apiUrl: "http://localhost:8745",
+      // }}
+    >
       <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
         <App />
       </ThemeProvider>
