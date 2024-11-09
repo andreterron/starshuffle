@@ -269,7 +269,13 @@ function App() {
                   addNewRepo();
                 }}
                 onNext={() => addNewRepo()}
-                className={i === 0 ? "z-30" : i === 1 ? "z-20" : "z-10"}
+                className={
+                  i === 0
+                    ? "z-30 cursor-grab"
+                    : i === 1
+                    ? "z-20 cursor-grab"
+                    : "z-10 cursor-grab"
+                }
                 initial={{ opacity: 1, scale: 0.8 }}
                 animate={{
                   opacity: 1,
