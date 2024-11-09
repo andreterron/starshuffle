@@ -92,7 +92,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen relative flex flex-col px-4 md:px-0">
+    <div className="min-h-screen relative flex flex-col mt-3 px-4 md:px-0">
       <div
         className="flex-shrink-0 flex-grow-0"
         style={{
@@ -276,7 +276,7 @@ function App() {
                     ? "z-20 cursor-grab"
                     : "z-10 cursor-grab"
                 }
-                initial={{ opacity: 1, scale: 0.8 }}
+                initial={{ opacity: 1, scale: 0.85, y: i === 2 ? -272 : 0 }}
                 animate={{
                   opacity: 1,
                   scale: 1 - i * 0.05,
@@ -284,7 +284,7 @@ function App() {
                   transition: {
                     type: "spring",
                     bounce: 0,
-                    duration: i === 1 ? 0.3 : i === 2 ? 0.4 : 0.5,
+                    duration: i === 1 ? 0.3 : i === 2 ? 0.32 : 0.34,
                   },
                 }}
                 exit={{
@@ -292,6 +292,7 @@ function App() {
                   x: 0,
                   y: 32,
                   zIndex: -10,
+                  scale: 0.8,
                   filter: "blur(4px)",
                   transition: { type: "spring", bounce: 0, duration: 0.3 },
                 }}

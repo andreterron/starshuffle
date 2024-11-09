@@ -25,7 +25,7 @@ const RepoCard = forwardRef<HTMLDivElement, RepoCardProps>(
     return (
       <Card
         ref={ref}
-        className={`w-full md:w-[36rem] max-w-full h-48 overflow-hidden relative border-input shadow-[0_8px_16px_0px_rgba(0,0,0,0.08)] ${
+        className={`w-full md:w-[36rem] max-w-full h-48 overflow-hidden relative border-input dark:border-border/50 shadow-[0_8px_16px_0px_rgba(0,0,0,0.08)] ${
           className ?? ""
         }`}
         {...props}
