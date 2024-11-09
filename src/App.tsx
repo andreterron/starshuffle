@@ -270,11 +270,7 @@ function App() {
                 }}
                 onNext={() => addNewRepo()}
                 className={
-                  i === 0
-                    ? "z-30 cursor-grab"
-                    : i === 1
-                    ? "z-20 cursor-grab"
-                    : "z-10 cursor-grab"
+                  i === 0 ? "z-30 cursor-grab" : i === 1 ? "z-20" : "z-10"
                 }
                 initial={{ opacity: 1, scale: 0.85, y: i === 2 ? -272 : 0 }}
                 animate={{
@@ -294,7 +290,7 @@ function App() {
                   zIndex: -10,
                   scale: 0.8,
                   filter: "blur(4px)",
-                  transition: { type: "spring", bounce: 0, duration: 0.3 },
+                  transition: { type: "spring", bounce: 0, duration: 0.45 },
                 }}
                 transition={{
                   duration: 0.3,
