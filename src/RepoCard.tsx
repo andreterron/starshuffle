@@ -11,37 +11,35 @@ import {
   CardContent,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { SVGProps } from "react";
+import { RefObject, SVGProps, forwardRef } from "react";
+import { motion, HTMLMotionProps } from "framer-motion";
 
-export default function RepoCard({
-  repo,
-  className,
-  onNext,
-}: {
+interface RepoCardProps extends HTMLMotionProps<"div"> {
   repo: any;
   className?: string;
   onNext?: () => void;
-}) {
-  return (
-    <div className="w-full md:w-[36rem] max-w-full mt-6 relative">
-      <div className="absolute inset-0 rounded-lg shadow-md dark:shadow-none" />
-      <Card className="dark:border-border/40 absolute inset-x-[1.85rem] top-[-1.35rem] h-12" />
-      <Card className="dark:border-border/60 shadow-[0_-12px_12px_-12px_rgba(0,0,0,0.2)] dark:shadow-none absolute inset-x-4 -top-3 h-12" />
+}
+
+const RepoCard = forwardRef<HTMLDivElement, RepoCardProps>(
+  ({ repo, className, onNext, ...props }, ref) => {
+    return (
       <Card
-        className={`w-full overflow-hidden relative shadow-[0_-12px_16px_-16px_rgba(0,0,0,0.2)] dark:shadow-none ${
+        ref={ref}
+        className={`w-full md:w-[36rem] max-w-full h-48 overflow-hidden relative border-input shadow-[0_8px_16px_0px_rgba(0,0,0,0.08)] ${
           className ?? ""
         }`}
+        {...props}
       >
         <div className="flex items-start justify-between gap-2">
           <CardHeader className="p-3 md:p-6">
-            <CardTitle className="text-lg md:text-xl">
+            <CardTitle className="text-lg md:text-xl line-clamp-2">
               <span className="font-normal text-muted-foreground">
                 {repo.owner.login} /{" "}
               </span>
               {/* <div className="h-6 w-px relative skew-x-5 border-r" /> */}
               {repo.name}
             </CardTitle>
-            <CardDescription className="text-xs md:text-base !mt-0 md:mt-2">
+            <CardDescription className="text-xs md:text-base !mt-0 md:mt-2 line-clamp-3">
               {repo.description || (
                 <span className="text-muted-foreground/50 italic">
                   No description
@@ -84,7 +82,7 @@ export default function RepoCard({
             )}
           </div>
         </div>
-        <CardContent className="p-3 md:p-6">
+        <CardContent className="absolute bottom-0 left-0 right-0 p-3 md:p-6">
           <div className="flex gap-4 text-sm text-muted-foreground">
             <div className="flex items-center">
               <CircleDotIcon className="w-3 h-3 mr-1" />
@@ -94,13 +92,14 @@ export default function RepoCard({
               <StarIcon className="w-3 h-3 mr-1" />
               {repo.stargazers_count}
             </div>
-            {/* <div>Updated April 2023</div> */}
           </div>
         </CardContent>
       </Card>
-    </div>
-  );
-}
+    );
+  }
+);
+
+RepoCard.displayName = "RepoCard";
 
 function CircleDotIcon(props: SVGProps<SVGSVGElement>) {
   return (
@@ -160,3 +159,6 @@ function XIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
+// Create and export the motion version
+export default motion(RepoCard);

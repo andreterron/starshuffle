@@ -20,17 +20,22 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ModeToggle } from "./components/ui/mode-toggle";
 import posthog from "posthog-js";
+import { AnimatePresence, motion } from "framer-motion";
+
+const MotionRepoCard = motion(RepoCard);
 
 function App() {
+  const [randomIndices, setRandomIndices] = useState<number[]>([]);
+
   const { connection, isLoading, initiateAuth, disconnect } =
     useConnection("github");
-
   // This makes a request to the GitHub API through a Mainframe proxy
   const { data } = useRequest(connection, "/user");
   const { data: starredRepos, isLoading: isLoadingStarredRepos } = useRequest(
     connection,
-    "/user/starred?per_page=100",
+    "/user/starred?per_page=100"
   );
+  const mainframeRepo = useMainframeRepo();
 
   useEffect(() => {
     if (data?.login) {
@@ -38,32 +43,53 @@ function App() {
     }
   }, [data?.login]);
 
-  const mainframeRepo = useMainframeRepo();
-
-  const [randomIndex, setRandomIndex] = useState(-1);
-
-  // DEMO
-  // const [counter, setCounter] = useState(4);
-
   useEffect(() => {
     if (!starredRepos) {
       return;
     }
-    // DEMO
-    // const mainframeIndex = (starredRepos as any[]).findIndex(
-    //   (r: any) => r.name === "mainframe",
-    // );
-    // if (mainframeIndex >= 0) {
-    //   setRandomIndex(mainframeIndex);
-    //   return;
-    // }
-    setRandomIndex(
-      Math.min(
+    const maxRepos = Math.min(3, starredRepos.length);
+    const indices: number[] = [];
+    while (indices.length < maxRepos) {
+      const newIndex = Math.min(
         starredRepos.length - 1,
-        Math.floor(Math.random() * starredRepos.length),
-      ),
-    );
+        Math.floor(Math.random() * starredRepos.length)
+      );
+      if (!indices.includes(newIndex)) {
+        indices.push(newIndex);
+      }
+    }
+    setRandomIndices(indices);
   }, [starredRepos?.length]);
+
+  const addNewRepo = () => {
+    setRandomIndices((prevIndices) => {
+      const newIndices = [...prevIndices.slice(1)];
+
+      if (starredRepos.length <= 4) {
+        const availableIndices = Array.from(
+          { length: starredRepos.length },
+          (_, i) => i
+        ).filter((i) => !prevIndices.includes(i));
+
+        // If no more unique indices, start over
+        if (availableIndices.length === 0) {
+          return [...newIndices, prevIndices[0]];
+        }
+
+        return [...newIndices, availableIndices[0]];
+      }
+
+      let newIndex: number;
+      do {
+        newIndex = Math.min(
+          starredRepos.length - 1,
+          Math.floor(Math.random() * starredRepos.length)
+        );
+      } while (prevIndices.includes(newIndex));
+
+      return [...newIndices, newIndex];
+    });
+  };
 
   return (
     <div className="min-h-screen relative flex flex-col px-4 md:px-0">
@@ -230,37 +256,48 @@ function App() {
       </div>
 
       <div className="flex flex-col items-center pt-32 px-4 w-full flex-grow flex-shrink-0">
-        {/* <button onClick={() => initiateAuth()}>
-        {connection ? "Connected ✓" : "Connect to GitHub"}
-      </button>
-      {data && <p>Connected as @{data.login}</p>} */}
         {starredRepos ? (
-          randomIndex >= 0 && randomIndex < starredRepos.length ? (
-            <RepoCard
-              repo={starredRepos[randomIndex]}
-              onNext={() => {
-                // DEMO
-                // if (counter === 1) {
-                //   const mainframeIndex = (starredRepos as any[]).findIndex(
-                //     (r: any) => r.name === "mainframe",
-                //   );
-                //   if (mainframeIndex >= 0) {
-                //     setRandomIndex(mainframeIndex);
-                //     return;
-                //   }
-                // }
-                // setCounter((v) => v - 1);
-                setRandomIndex(
-                  Math.min(
-                    starredRepos.length - 1,
-                    Math.floor(Math.random() * starredRepos.length),
-                  ),
-                );
-              }}
-            />
-          ) : null
+          <AnimatePresence mode="popLayout">
+            {randomIndices.map((index, i) => (
+              <MotionRepoCard
+                drag={i === 0}
+                dragSnapToOrigin={i === 0}
+                layoutId={`repo-${index}`}
+                key={index}
+                repo={starredRepos[index]}
+                onDragEnd={() => {
+                  addNewRepo();
+                }}
+                onNext={() => addNewRepo()}
+                className={i === 0 ? "z-30" : i === 1 ? "z-20" : "z-10"}
+                initial={{ opacity: 1, scale: 0.8 }}
+                animate={{
+                  opacity: 1,
+                  scale: 1 - i * 0.05,
+                  y: i === 1 ? -160 : i === 2 ? -320 : 0,
+                  transition: {
+                    type: "spring",
+                    bounce: 0,
+                    duration: i === 1 ? 0.3 : i === 2 ? 0.4 : 0.5,
+                  },
+                }}
+                exit={{
+                  opacity: 0,
+                  x: 0,
+                  y: 32,
+                  zIndex: -10,
+                  filter: "blur(4px)",
+                  transition: { type: "spring", bounce: 0, duration: 0.3 },
+                }}
+                transition={{
+                  duration: 0.3,
+                  layout: { type: "spring", bounce: 0, duration: 0.3 },
+                }}
+              />
+            ))}
+          </AnimatePresence>
         ) : isLoading || isLoadingStarredRepos ? (
-          <Loader2Icon className="size-6 animate-spin" />
+          <Loader2Icon className="size-10 animate-spin" />
         ) : (
           <div>
             <div className="text-center flex flex-col items-center">
@@ -312,73 +349,6 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          {/* <svg
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <rect
-              width="16"
-              height="16"
-              rx="8"
-              fill="url(#paint0_linear_1_463)"
-            />
-            <g filter="url(#filter0_d_1_463)">
-              <path
-                d="M12.6333 10.8914C12.4276 10.6057 12.4162 10.2286 12.4162 9.42857V6.57143C12.4162 5.78286 12.4276 5.40571 12.6333 5.10857C12.9304 4.69714 13.0104 4.56 12.999 4.35429C12.9761 4.11429 12.8161 4 12.4734 4H10.8623C10.2452 4 10.0967 4.19429 9.87961 4.70857C9.5711 5.41714 7.98286 9.17714 7.98286 9.17714C7.98286 9.17714 6.56601 5.31429 6.32606 4.66286C6.12039 4.12571 5.80046 4 5.32056 4H3.53807C3.18386 4 3.02389 4.11429 3.00104 4.35429C2.98962 4.56 3.0696 4.69714 3.36668 5.10857C3.57235 5.40571 3.5952 5.78286 3.5952 6.57143V9.42857C3.5952 10.2286 3.57235 10.6057 3.36668 10.8914C3.0696 11.3029 2.98962 11.4514 3.00104 11.6571C3.02389 11.8971 3.18386 12 3.53807 12H4.73782C5.09204 12 5.252 11.8971 5.27485 11.6571C5.28628 11.4514 5.19487 11.3029 4.89779 10.8914C4.69212 10.6057 4.66927 10.2286 4.66927 9.42857V6.50286C5.42339 8.35429 6.29179 10.5943 6.41747 10.9257C6.63457 11.4971 6.88595 12 7.41155 12C8.06284 12 8.18853 11.52 8.51989 10.72C8.70271 10.2743 9.55968 8.20571 10.2452 6.56V9.42857C10.2452 10.2286 10.2338 10.6057 10.0281 10.8914C9.73107 11.3029 9.65108 11.4514 9.66251 11.6571C9.68536 11.8971 9.84533 12 10.1881 12H12.4734C12.8161 12 12.9761 11.8971 12.999 11.6571C13.0104 11.4514 12.9304 11.3029 12.6333 10.8914Z"
-                fill="black"
-              />
-            </g>
-            <defs>
-              <filter
-                id="filter0_d_1_463"
-                x="3"
-                y="4"
-                width="10.5"
-                height="8.5"
-                filterUnits="userSpaceOnUse"
-                color-interpolation-filters="sRGB"
-              >
-                <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                <feColorMatrix
-                  in="SourceAlpha"
-                  type="matrix"
-                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                  result="hardAlpha"
-                />
-                <feOffset dx="0.5" dy="0.5" />
-                <feComposite in2="hardAlpha" operator="out" />
-                <feColorMatrix
-                  type="matrix"
-                  values="0 0 0 0 0.819608 0 0 0 0 0.835294 0 0 0 0 0.858824 0 0 0 1 0"
-                />
-                <feBlend
-                  mode="normal"
-                  in2="BackgroundImageFix"
-                  result="effect1_dropShadow_1_463"
-                />
-                <feBlend
-                  mode="normal"
-                  in="SourceGraphic"
-                  in2="effect1_dropShadow_1_463"
-                  result="shape"
-                />
-              </filter>
-              <linearGradient
-                id="paint0_linear_1_463"
-                x1="8"
-                y1="0"
-                x2="8"
-                y2="16"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stop-color="#E0F2FE" />
-                <stop offset="1" stop-color="#D1FAE5" />
-              </linearGradient>
-            </defs>
-          </svg> */}
           <span className="">Mainframe</span>
         </a>
       </footer>
